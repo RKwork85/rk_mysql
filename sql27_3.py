@@ -1,22 +1,12 @@
 '''
-更新产品卡片名
-目标表：brands_product
-表字段：
-Product_ID
-int
-Product_Number
-varchar(255)
-Product_Name
-varchar(255)
-brand_id
-int
+实现卡片信息的批量化存储
 
 '''
 
 import pymysql
 dataJson = {
     "产品名": ["夹克外套"],
-    "货号": ["S4AW1239"],
+    "产品编号": ["S4AW1239"],
     "颜色": ["森林绿", "火山灰", "曜石黑", "暗夜红"],
     "工艺": ["净色"],
     "用户痛点": [
@@ -72,18 +62,158 @@ try:
 
         # 下一个 Product_ID 为当前记录数量+1
         next_product_id = current_count + 1
-
+        CardId = next_product_id
+        print(next_product_id)
         # SQL 插入语句
 
         # 实现产品名
         sql_cardInfo = """
-        INSERT INTO brands_product (Product_ID, Product_Number, Product_Name, brand_id)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO brands_product (Product_ID,Product_Number, Product_Name, brand_id)
+        VALUES (%s,%s, %s, %s)
         """
-        # 数据，注意这里的 Product_Number 和 Product_Name 是字符串，brand_id 是整型
-        data = (next_product_id, dataJson['货号'], dataJson['产品名'], next_product_id)
+        data = ( next_product_id, dataJson['产品编号'], dataJson['产品名'], 1)
         cursor.execute(sql_cardInfo, data)
 
+        # # 增加颜色
+        cursor.execute("SELECT COUNT(*) FROM Product_Color")
+        result = cursor.fetchone()[0]
+        print(result)
+        insertColor = """
+        INSERT INTO Product_Color(ID, Product_Color, Tag, Card)
+        VALUES(%s, %s, %s, %s)
+        """
+        for index, i in enumerate(dataJson['颜色']):
+          data = (index+1+result,  i, "颜色", CardId ) 
+          cursor.execute(insertColor, data)   
+
+        ## 增加设计宣传
+        cursor.execute("SELECT COUNT(*)FROM Product_DesignTagline ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_DesignTagline(ID, Product_DesignTagline, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['设计宣传']):
+            data= (index + 1 + count, i, "设计宣传", CardId)
+            cursor.execute(inserDesignTagline, data)
+
+        ## 增加FAB解说
+        cursor.execute("SELECT COUNT(*)FROM Product_FabDescription ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_FabDescription(ID, Product_FabDescription, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['FAB 产品解说']):
+            data= (index + 1 + count, i, "FAB 产品解说", CardId)
+            cursor.execute(inserDesignTagline, data)
+        
+
+
+        ## 增加面料解说
+        cursor.execute("SELECT COUNT(*)FROM Product_FabricDescription ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_FabricDescription(ID, Product_FabricDescription, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['面料解说']):
+            data= (index + 1 + count, i, "面料解说", CardId)
+            cursor.execute(inserDesignTagline, data)
+
+        ## 增加面料宣传
+        cursor.execute("SELECT COUNT(*)FROM Product_FabricTagline ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_FabricTagline(ID, Product_FabricTagline, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['面料宣传']):
+            data= (index + 1 + count, i, "面料宣传", CardId)
+            cursor.execute(inserDesignTagline, data)
+
+
+
+        ## 增加产品工艺
+        cursor.execute("SELECT COUNT(*)FROM Product_Process ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_Process(ID, Product_Process, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['工艺']):
+            data= (index + 1 + count, i, "工艺", CardId)
+            cursor.execute(inserDesignTagline, data)
+
+        ## 增加运动场景
+        cursor.execute("SELECT COUNT(*)FROM Product_SportScenes ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_SportScenes(ID, Product_SportScenes, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['运动场景']):
+            data= (index + 1 + count, i, "运动场景", CardId)
+            cursor.execute(inserDesignTagline, data)
+
+        ## 增加宣传语
+        cursor.execute("SELECT COUNT(*)FROM Product_Tagline ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_Tagline(ID, Product_Tagline, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['一句话宣传']):
+            data= (index + 1 + count, i, "一句话宣传", CardId)
+            cursor.execute(inserDesignTagline, data)
+
+
+        ## 增加用户痛点
+        cursor.execute("SELECT COUNT(*)FROM Product_UserPainPoints ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_UserPainPoints(ID, Product_UserPainPoints, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['用户痛点']):
+            data= (index + 1 + count, i, "用户痛点", CardId)
+            cursor.execute(inserDesignTagline, data)
+        
+        
+        ## 版型宣传 
+        cursor.execute("SELECT COUNT(*)FROM Product_PatternTagline ")
+        count = cursor.fetchone()[0]
+
+        inserDesignTagline='''
+        Insert INTO Product_PatternTagline(ID, Product_PatternTagline, Tag, Card)
+        Values(%s, %s, %s, %s)
+'''
+        for index, i in enumerate(dataJson['版型宣传']):
+            data= (index + 1 + count, i, "版型宣传", CardId)
+            cursor.execute(inserDesignTagline, data)
+        
+        
+        
+
+
+
+        
+        # INSERT INTO Product_Color (ID, Product_Color, Tag, Card)
+        # VALUES (%s, %s, %s, %s)
+
+        # data = (next_product_id, dataJson['产品编号'], dataJson['产品名'], next_product_id)
+        # cursor.execute(sql_cardInfo, data)
+        # """
+        # for item in data:
+        #   cursor.execute(insertColor, (item['颜色'], '颜色', next_product_id))  # 为 tag 字段赋值为'颜色'
         
         # 执行 SQL，并传入数据
         connection.commit()  # 提交事务
