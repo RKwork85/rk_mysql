@@ -1,6 +1,6 @@
-function main({ data1 }) {
+function main({ product_info }) {
   // 解析 JSON 字符串
-  const parsedData = JSON.parse(data1);
+  const parsedData = JSON.parse(product_info);
 
   // 获取 'result' 数组
   const resultArray = parsedData.result;
@@ -18,8 +18,10 @@ function main({ data1 }) {
 }
 
 let data = {
-  "data1": "{\"result\":[{\"Product_ID\":1,\"Product_Name\":\"小冰纱防晒外套\",\"brand_id\":1},{\"Product_ID\":2,\"Product_Name\":\"无缝拼接鹅绒外套\",\"brand_id\":1}]}"
-};
+  "product_info": "{\"data\":[{\"Product_ID\":1,\"Product_Number\":\"S4SS1067\",\"Product_Name\":\"小冰纱防晒外套\",\"brand_id\":1},{\"Product_ID\":2,\"Product_Number\":\"S3AW1066\",\"Product_Name\":\"无缝拼接鹅绒外套\",\"brand_id\":1}]}",
+  "userInput": "1sadsd"
+}
+;
 
 let result_list = main(data);
 

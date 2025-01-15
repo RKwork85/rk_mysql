@@ -27,16 +27,16 @@ function main({ data1 }) {
   
     // 定义每个二维数组对应的选取条数
     const selectionCounts = [
-        2,    // index 0
-        1,    // index 1
-        [1, 0], // index 2
-        [2, 1], // index 3
-        [1, 0], // index 4
-        [1, 0], // index 5
-        [1, 0], // index 6
-        [1, 3], // index 7
-        [1, 2], // index 8
-        1     // index 9
+        2,    // index 0 产品解说
+        1,    // index 1 面料宣传
+        [1, 0], // index 2  工艺
+        [2, 1], // index 3 运动场景
+        [1, 0], // index 4  一句话宣传
+        [1, 0], // index 5  用户痛点
+        [1, 0], // index 6  版型宣传
+        [1, 3], // index 7  颜色
+        [1, 2], // index 8  设计宣传
+        1     // index 9  面料解说
     ];
   
     // 创建一个函数来处理随机选择

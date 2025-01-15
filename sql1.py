@@ -22,3 +22,24 @@ try:
 finally:
     # 关闭连接
     connection.close()
+
+
+
+
+CREATE TABLE IF NOT EXISTS brands_product (
+    ->         ID INT PRIMARY KEY,
+    ->         Product_Name VARCHAR(255),
+    ->         Product_Number VARCHAR(255),
+    ->         brand_id INT,
+    ->         FOREIGN KEY (brand_id) REFERENCES brands(brand_id) ON DELETE CASCADE ON UPDATE CASCADE
+    -> ;
+
+
+mysql> CREATE TABLE IF NOT EXISTS brands_product (
+        ID INT AUTO_INCREMENT PRIMARY KEY,  
+        Product_Name VARCHAR(255) ,                       
+        Product_Number VARCHAR(255),              
+        brand_id INT,                              
+        FOREIGN KEY (brand_id) REFERENCES brands(brand_id) ON DELETE CASCADE ON UPDATE CASCADE  
+    );
+

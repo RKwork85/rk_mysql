@@ -34,7 +34,7 @@ function main({ data1, userInput }) {
   
   // 测试函数
   console.log(main({ data1: data.data1, userInput: '1' }));         // 应返回 { finddata: {...} }
-  console.log(main({ data1: data.data1, userInput: '小冰纱防晒外套' })); // 应返回 { finddata: {...} }
+  console.log(main({ data1: data.data1, userInput: '无缝拼接鹅绒外套' })); // 应返回 { finddata: {...} }
   console.log(main({ data1: data.data1, userInput: '不存在的数据' }));    // 应返回 { unfind: "没有该数据" }
 
   

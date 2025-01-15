@@ -15,12 +15,8 @@ connection = pymysql.connect(
 
 # 要创建的表名列表
 table_names = [
-    "Daily_Topics",
-    "Style_Topics",
-    "Scene_Topics",
-    "Function_Topics",
-    "Good_Finds_Topics",
-    "Personality_Topics"
+    "S&W_Marketing",
+
 ]
 
 # 创建表的 SQL 模板
