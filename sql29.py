@@ -41,3 +41,8 @@ except Exception as e:
 finally:
     # 关闭数据库连接
     connection.close()
+
+
+
+
+# ADD CONSTRAINT Product_patternTagline_ibfk_1 FOREIGN KEY (Card) REFERENCES brands_product(Product_ID);
