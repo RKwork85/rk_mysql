@@ -99,13 +99,15 @@ def insert_data():
 
     """
     prompt_class2 = "Functional_Videos_Marketing"
+    Template_Table1 = "Functional_Videos_Marketing"
+    Template_Table2 = "S&W_Marketing"
 
     # 插入数据的SQL语句
-    insert_sql = "INSERT INTO Prompt_Template (Prompt, Prompt_Class) VALUES (%s, %s)"
+    insert_sql = "INSERT INTO Prompt_Template (Prompt, Prompt_Class, Template_Table) VALUES (%s, %s, %s)"
     
     # 插入数据
-    cursor.execute(insert_sql, (prompt1, prompt_class1))
-    cursor.execute(insert_sql, (prompt2, prompt_class2))
+    cursor.execute(insert_sql, (prompt1, prompt_class1, Template_Table1))
+    cursor.execute(insert_sql, (prompt2, prompt_class2, Template_Table2))
     
     print("数据插入成功！")
     cursor.close()
